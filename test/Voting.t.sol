@@ -39,7 +39,7 @@ contract VotingTest is Test {
 
     function testResetOnlyOwnerReverts() public {
         vm.prank(address(0xBEEF));
-        vm.expectRevert();
+        vm.expectRevert("not owner");
         voting.resetVotes();
     }
 

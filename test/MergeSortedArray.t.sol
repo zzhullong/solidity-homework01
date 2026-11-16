@@ -35,8 +35,28 @@ contract MergeSortedArrayTest is Test {
         uint256[] memory result = merge.mergeSorted(a, b);
 
         assertEq(result.length, a.length + b.length);
+        assertEq(result, _referenceMerge(a, b));
         for (uint256 i = 1; i < result.length; ++i) {
             assertLe(result[i - 1], result[i]);
+        }
+    }
+
+    function _referenceMerge(uint256[] memory a, uint256[] memory b) private pure returns (uint256[] memory ref) {
+        ref = new uint256[](a.length + b.length);
+        for (uint256 i; i < a.length; ++i) {
+            ref[i] = a[i];
+        }
+        for (uint256 i; i < b.length; ++i) {
+            ref[a.length + i] = b[i];
+        }
+        for (uint256 i = 1; i < ref.length; ++i) {
+            uint256 key = ref[i];
+            uint256 j = i;
+            while (j > 0 && ref[j - 1] > key) {
+                ref[j] = ref[j - 1];
+                --j;
+            }
+            ref[j] = key;
         }
     }
 

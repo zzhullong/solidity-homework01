@@ -5,7 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {IntegerToRoman} from "../src/IntegerToRoman.sol";
 import {RomanToInteger} from "../src/RomanToInteger.sol";
 
-contract RomanTest is Test {
+contract IntegerToRomanTest is Test {
     IntegerToRoman toRoman;
     RomanToInteger toInt;
 
@@ -25,35 +25,13 @@ contract RomanTest is Test {
     }
 
     function testIntToRomanZeroReverts() public {
-        vm.expectRevert();
+        vm.expectRevert("out of range");
         toRoman.intToRoman(0);
     }
 
     function testIntToRomanAbove3999Reverts() public {
-        vm.expectRevert();
+        vm.expectRevert("out of range");
         toRoman.intToRoman(4000);
-    }
-
-    function testRomanToIntExamples() public view {
-        assertEq(toInt.romanToInt("III"), 3);
-        assertEq(toInt.romanToInt("IV"), 4);
-        assertEq(toInt.romanToInt("IX"), 9);
-        assertEq(toInt.romanToInt("LVIII"), 58);
-        assertEq(toInt.romanToInt("MCMXCIV"), 1994);
-    }
-
-    function testRomanToIntEmptyReverts() public {
-        vm.expectRevert();
-        toInt.romanToInt("");
-    }
-
-    function testRomanToIntInvalidCharReverts() public {
-        vm.expectRevert();
-        toInt.romanToInt("ABC");
-    }
-
-    function testRomanToIntNonCanonicalAdds() public view {
-        assertEq(toInt.romanToInt("IIII"), 4);
     }
 
     function testFuzzRomanRoundTrip(uint256 n) public view {

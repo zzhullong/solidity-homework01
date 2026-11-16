@@ -8,8 +8,8 @@ MetaNodeAcademy LearningRoadmap [`contract/homework01.md`](https://github.com/Me
 |---|---|---|---|
 | 1 | Voting 投票合约 | `src/Voting.sol` | `test/Voting.t.sol` |
 | 2 | 字符串反转 | `src/ReverseString.sol` | `test/ReverseString.t.sol` |
-| 3 | 整数转罗马数字 | `src/IntegerToRoman.sol` | `test/Roman.t.sol` |
-| 4 | 罗马数字转整数 | `src/RomanToInteger.sol` | `test/Roman.t.sol` |
+| 3 | 整数转罗马数字 | `src/IntegerToRoman.sol` | `test/IntegerToRoman.t.sol` |
+| 4 | 罗马数字转整数 | `src/RomanToInteger.sol` | `test/RomanToInteger.t.sol` |
 | 5 | 合并两个有序数组 | `src/MergeSortedArray.sol` | `test/MergeSortedArray.t.sol` |
 | 6 | 二分查找 | `src/BinarySearch.sol` | `test/BinarySearch.t.sol` |
 
