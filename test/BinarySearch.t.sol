@@ -11,6 +11,7 @@ contract BinarySearchTest is Test {
         search = new BinarySearch();
     }
 
+    /// @dev 命中首、中、尾三个位置
     function testFindFirstMiddleLast() public view {
         uint256[] memory a = arr5(1, 3, 5, 7, 9);
         assertEq(search.binarySearch(a, 1), int256(0));
@@ -18,14 +19,17 @@ contract BinarySearchTest is Test {
         assertEq(search.binarySearch(a, 9), int256(4));
     }
 
+    /// @dev 目标不存在时返回 -1
     function testNotFoundReturnsMinusOne() public view {
         assertEq(search.binarySearch(arr3(1, 3, 5), 4), int256(-1));
     }
 
+    /// @dev 空数组返回 -1
     function testEmptyReturnsMinusOne() public view {
         assertEq(search.binarySearch(new uint256[](0), 1), int256(-1));
     }
 
+    /// @dev 重复元素允许返回任一命中下标，但必须指向目标值
     function testDuplicateReturnsValidIndex() public view {
         uint256[] memory a = arr5(1, 2, 2, 2, 3);
         int256 idx = search.binarySearch(a, 2);
@@ -33,6 +37,7 @@ contract BinarySearchTest is Test {
         assertEq(a[uint256(idx)], 2);
     }
 
+    /// @dev fuzz：与线性查找的“是否存在”结论一致；命中时下标必须合法且指向目标值
     function testFuzzMatchesLinearSearch(bytes calldata seed, uint256 target) public view {
         uint256[] memory a = _sortedFromSeed(seed);
         target = target % 40;
@@ -55,6 +60,7 @@ contract BinarySearchTest is Test {
         }
     }
 
+    /// @dev 由 fuzz 字节生成一个升序数组
     function _sortedFromSeed(bytes calldata seed) private pure returns (uint256[] memory sorted) {
         uint256 n = seed.length % 9;
         sorted = new uint256[](n);

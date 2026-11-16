@@ -11,24 +11,29 @@ contract MergeSortedArrayTest is Test {
         merge = new MergeSortedArray();
     }
 
+    /// @dev 两个等长有序数组交叉合并
     function testMergeBasic() public view {
         assertEq(merge.mergeSorted(arr3(1, 3, 5), arr3(2, 4, 6)), arr6(1, 2, 3, 4, 5, 6));
     }
 
+    /// @dev 任一数组为空时应直接返回另一个数组
     function testMergeOneEmpty() public view {
         assertEq(merge.mergeSorted(new uint256[](0), arr2(1, 2)), arr2(1, 2));
         assertEq(merge.mergeSorted(arr2(1, 2), new uint256[](0)), arr2(1, 2));
     }
 
+    /// @dev 两个空数组合并结果长度为 0
     function testMergeBothEmpty() public view {
         uint256[] memory result = merge.mergeSorted(new uint256[](0), new uint256[](0));
         assertEq(result.length, 0);
     }
 
+    /// @dev 重复元素全部保留，不做去重
     function testMergeDuplicates() public view {
         assertEq(merge.mergeSorted(arr3(1, 1, 3), arr2(1, 2)), arr5(1, 1, 1, 2, 3));
     }
 
+    /// @dev fuzz：长度、与独立参考实现的结果完全一致、整体非降序
     function testFuzzMergeSortedProperty(bytes calldata seedA, bytes calldata seedB) public view {
         uint256[] memory a = _sortedFromSeed(seedA);
         uint256[] memory b = _sortedFromSeed(seedB);
@@ -41,6 +46,7 @@ contract MergeSortedArrayTest is Test {
         }
     }
 
+    /// @dev 独立参考实现：拼接后插入排序，不依赖被测的双指针逻辑
     function _referenceMerge(uint256[] memory a, uint256[] memory b) private pure returns (uint256[] memory ref) {
         ref = new uint256[](a.length + b.length);
         for (uint256 i; i < a.length; ++i) {
@@ -60,6 +66,7 @@ contract MergeSortedArrayTest is Test {
         }
     }
 
+    /// @dev 由 fuzz 字节生成一个升序数组
     function _sortedFromSeed(bytes calldata seed) private pure returns (uint256[] memory sorted) {
         uint256 n = seed.length % 9;
         sorted = new uint256[](n);
