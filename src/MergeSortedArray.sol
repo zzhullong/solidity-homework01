@@ -2,11 +2,7 @@
 pragma solidity ^0.8.24;
 
 contract MergeSortedArray {
-    function mergeSorted(uint256[] memory a, uint256[] memory b)
-        public
-        pure
-        returns (uint256[] memory)
-    {
+    function mergeSorted(uint256[] memory a, uint256[] memory b) public pure returns (uint256[] memory) {
         uint256[] memory result = new uint256[](a.length + b.length);
         uint256 i;
         uint256 j;

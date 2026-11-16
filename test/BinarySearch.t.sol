@@ -77,11 +77,7 @@ contract BinarySearchTest is Test {
         (r[0], r[1], r[2]) = (a, b, c);
     }
 
-    function arr5(uint256 a, uint256 b, uint256 c, uint256 d, uint256 e)
-        private
-        pure
-        returns (uint256[] memory r)
-    {
+    function arr5(uint256 a, uint256 b, uint256 c, uint256 d, uint256 e) private pure returns (uint256[] memory r) {
         r = new uint256[](5);
         (r[0], r[1], r[2], r[3], r[4]) = (a, b, c, d, e);
     }
