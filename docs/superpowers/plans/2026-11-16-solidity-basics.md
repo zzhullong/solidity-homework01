@@ -1,6 +1,6 @@
 # 作业一：Solidity 基础练习 — 实施计划
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 用 Foundry 实现作业一的 6 道 Solidity 练习，每题配完整测试并推送为独立 GitHub 仓库。
 
@@ -39,7 +39,7 @@
 **Interfaces:**
 - Produces: 可运行 `forge build` 的空项目，后续任务直接往里加合约。
 
-- [ ] **Step 1: 建目录并初始化 git**
+- [x] **Step 1: 建目录并初始化 git**
 
 ```bash
 mkdir -p /Users/zulg/solidity-homework01/{src,test,script,lib}
@@ -47,7 +47,7 @@ cd /Users/zulg/solidity-homework01
 git init -b main
 ```
 
-- [ ] **Step 2: 写 `foundry.toml` 与 `remappings.txt`**
+- [x] **Step 2: 写 `foundry.toml` 与 `remappings.txt`**
 
 `foundry.toml`：
 ```toml
@@ -64,7 +64,7 @@ optimizer_runs = 200
 forge-std/=lib/forge-std/src/
 ```
 
-- [ ] **Step 3: 安装 forge-std**
+- [x] **Step 3: 安装 forge-std**
 
 ```bash
 forge install foundry-rs/forge-std
@@ -76,7 +76,7 @@ git submodule add git@github.com:foundry-rs/forge-std.git lib/forge-std || true
 git config -f .gitmodules submodule.lib/forge-std.url https://github.com/foundry-rs/forge-std.git
 ```
 
-- [ ] **Step 4: 写 `.gitignore` 与 README 骨架**
+- [x] **Step 4: 写 `.gitignore` 与 README 骨架**
 
 `.gitignore`：
 ```
@@ -87,12 +87,12 @@ broadcast/
 ```
 `README.md`：标题、作业来源链接、题目列表占位、运行方式 `forge test`。
 
-- [ ] **Step 5: 验证脚手架**
+- [x] **Step 5: 验证脚手架**
 
 Run: `forge build`
 Expected: 编译成功（无合约时输出 `Nothing to compile` 或 `Compiling...` 后成功）。
 
-- [ ] **Step 6: 首次提交**
+- [x] **Step 6: 首次提交**
 
 ```bash
 git add -A
@@ -118,7 +118,7 @@ git commit -m "chore: scaffold foundry project"
   }
   ```
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```solidity
 // test/Voting.t.sol
@@ -163,21 +163,21 @@ contract VotingTest is Test {
 }
 ```
 
-- [ ] **Step 2: 运行并确认失败**
+- [x] **Step 2: 运行并确认失败**
 
 Run: `forge test --match-contract VotingTest`
 Expected: 编译失败（Voting 未定义）。
 
-- [ ] **Step 3: 实现 `src/Voting.sol`**
+- [x] **Step 3: 实现 `src/Voting.sol`**
 
 要点：`address public immutable owner`；`mapping(string => uint256) private votes`；`string[] private candidates`；`vote` 在 `votes[candidate] == 0` 时把 candidate 推入数组；`resetVotes` 仅 owner，遍历 `candidates` 清零后 `delete candidates`。
 
-- [ ] **Step 4: 运行测试通过**
+- [x] **Step 4: 运行测试通过**
 
 Run: `forge test --match-contract VotingTest -vvv`
 Expected: 6 个测试 PASS。
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add src/Voting.sol test/Voting.t.sol
@@ -200,7 +200,7 @@ git commit -m "feat: add voting contract with tests"
   }
   ```
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```solidity
 function testReverseAbcde() public view {
@@ -223,21 +223,21 @@ function testFuzzReverseTwiceAscii(bytes memory raw) public view {
 }
 ```
 
-- [ ] **Step 2: 运行并确认失败**
+- [x] **Step 2: 运行并确认失败**
 
 Run: `forge test --match-contract ReverseStringTest`
 Expected: 编译失败（ReverseString 未定义）。
 
-- [ ] **Step 3: 实现**
+- [x] **Step 3: 实现**
 
 要点：`bytes memory b = bytes(s)`，首尾交换直到 `i >= j`，`return string(b)`。
 
-- [ ] **Step 4: 运行测试通过**
+- [x] **Step 4: 运行测试通过**
 
 Run: `forge test --match-contract ReverseStringTest -vvv`
 Expected: 5 个测试 PASS。
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add src/ReverseString.sol test/ReverseString.t.sol
@@ -250,7 +250,7 @@ git commit -m "feat: add ascii string reversal with tests"
 
 **Files:**
 - Create: `src/IntegerToRoman.sol`, `src/RomanToInteger.sol`
-- Test: `test/Roman.t.sol`
+- Test: `test/IntegerToRoman.t.sol`, `test/RomanToInteger.t.sol`
 
 **Interfaces:**
 - Produces:
@@ -259,7 +259,7 @@ git commit -m "feat: add ascii string reversal with tests"
   contract RomanToInteger { function romanToInt(string memory s) public pure returns (uint256); }
   ```
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 整数转罗马样例（LeetCode）：`3→"III"`、`4→"IV"`、`9→"IX"`、`58→"LVIII"`、`1994→"MCMXCIV"`、`1→"I"`、`3999→"MMMCMXCIX"`。
 失败路径：`intToRoman(0)` 与 `intToRoman(4000)` 用 `vm.expectRevert()`。
@@ -268,22 +268,22 @@ git commit -m "feat: add ascii string reversal with tests"
 
 fuzz：`testFuzzRomanRoundTrip(uint256 n)`，`n = bound(n, 1, 3999)`，断言 `romanToInt(intToRoman(n)) == n`。
 
-- [ ] **Step 2: 运行并确认失败**
+- [x] **Step 2: 运行并确认失败**
 
 Run: `forge test --match-contract RomanTest`
 Expected: 编译失败。
 
-- [ ] **Step 3: 实现**
+- [x] **Step 3: 实现**
 
 `IntegerToRoman`：贪心表 `[1000,900,500,400,100,90,50,40,10,9,5,4,1]` 与对应符号，循环拼接；`require(num >= 1 && num <= 3999)`。
 `RomanToInteger`：从右向左扫描，维护 `maxSeen`；字符映射不合法 `revert()`；`value < maxSeen` 则累减，否则累加并更新 `maxSeen`。
 
-- [ ] **Step 4: 运行测试通过**
+- [x] **Step 4: 运行测试通过**
 
 Run: `forge test --match-contract RomanTest -vvv`
 Expected: 全部 PASS。
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add src/IntegerToRoman.sol src/RomanToInteger.sol test/Roman.t.sol
@@ -307,7 +307,7 @@ git commit -m "feat: add roman numeral conversions with tests"
   }
   ```
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```solidity
 function testMergeBasic() public view {
@@ -330,21 +330,21 @@ function testFuzzMergeSorted(bytes calldata seedA, bytes calldata seedB) public 
 ```
 `arr(...)` 为测试内私有 helper。
 
-- [ ] **Step 2: 运行并确认失败**
+- [x] **Step 2: 运行并确认失败**
 
 Run: `forge test --match-contract MergeSortedArrayTest`
 Expected: 编译失败。
 
-- [ ] **Step 3: 实现**
+- [x] **Step 3: 实现**
 
 双指针 `i`、`j`，每次取较小者写入 `result[k]`，任一数组耗尽后复制剩余部分。
 
-- [ ] **Step 4: 运行测试通过**
+- [x] **Step 4: 运行测试通过**
 
 Run: `forge test --match-contract MergeSortedArrayTest -vvv`
 Expected: 全部 PASS。
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add src/MergeSortedArray.sol test/MergeSortedArray.t.sol
@@ -368,7 +368,7 @@ git commit -m "feat: add merge sorted arrays with tests"
   }
   ```
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```solidity
 function testFindFirstMiddleLast() public view {
@@ -394,21 +394,21 @@ function testFuzzMatchesLinearSearch(bytes calldata seed, uint256 target) public
 }
 ```
 
-- [ ] **Step 2: 运行并确认失败**
+- [x] **Step 2: 运行并确认失败**
 
 Run: `forge test --match-contract BinarySearchTest`
 Expected: 编译失败。
 
-- [ ] **Step 3: 实现**
+- [x] **Step 3: 实现**
 
 标准 `lo/hi` 循环，`mid = lo + (hi - lo) / 2`，避免加法溢出；未找到 `return -1`。
 
-- [ ] **Step 4: 运行测试通过**
+- [x] **Step 4: 运行测试通过**
 
 Run: `forge test --match-contract BinarySearchTest -vvv`
 Expected: 全部 PASS。
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add src/BinarySearch.sol test/BinarySearch.t.sol
@@ -422,21 +422,21 @@ git commit -m "feat: add binary search with tests"
 **Files:**
 - Modify: `README.md`
 
-- [ ] **Step 1: 补全 README**
+- [x] **Step 1: 补全 README**
 
 内容：作业来源链接、6 道题列表与对应合约路径、`forge test` / `forge test -vvv` 运行说明、ASCII 反转限制说明、罗马范围说明。
 
-- [ ] **Step 2: 全量测试**
+- [x] **Step 2: 全量测试**
 
 Run: `forge test -vvv`
 Expected: 全部 PASS，0 failed。
 
-- [ ] **Step 3: 格式检查**
+- [x] **Step 3: 格式检查**
 
 Run: `forge fmt --check`
 Expected: 无输出、退出码 0。若有差异，运行 `forge fmt` 后重新测试。
 
-- [ ] **Step 4: 提交**
+- [x] **Step 4: 提交**
 
 ```bash
 git add README.md
@@ -449,14 +449,14 @@ git commit -m "docs: describe exercises and how to run tests"
 
 **前置条件：** 用户已在 GitHub 创建空仓库 `zzhullong/solidity-homework01`，或提供了可创建仓库的凭据。
 
-- [ ] **Step 1: 关联远程**
+- [x] **Step 1: 关联远程**
 
 ```bash
 cd /Users/zulg/solidity-homework01
 git remote add origin git@github.com:zzhullong/solidity-homework01.git
 ```
 
-- [ ] **Step 2: 推送并验证**
+- [x] **Step 2: 推送并验证**
 
 ```bash
 git push -u origin main
