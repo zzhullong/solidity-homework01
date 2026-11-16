@@ -50,4 +50,18 @@ contract VotingTest is Test {
         }
         assertEq(voting.getVotes("Alice"), n);
     }
+
+    function testResetGasBoundedWithManyCandidates() public {
+        for (uint256 i; i < 200; ++i) {
+            voting.vote(string.concat("c", vm.toString(i)));
+        }
+
+        uint256 gasBefore = gasleft();
+        voting.resetVotes();
+        uint256 gasUsed = gasBefore - gasleft();
+
+        assertLt(gasUsed, 100_000);
+        assertEq(voting.getVotes("c0"), 0);
+        assertEq(voting.getVotes("c199"), 0);
+    }
 }

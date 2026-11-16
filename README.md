@@ -15,7 +15,7 @@ MetaNodeAcademy LearningRoadmap [`contract/homework01.md`](https://github.com/Me
 
 ## 实现说明
 
-- **Voting**：`mapping(string => uint256)` 记录得票，同时维护候选人数组以便重置。`resetVotes` 仅部署者（owner）可调用，重置后候选人列表一并清空，可重新开始投票。
+- **Voting**：`mapping(string => uint256)` 记录得票。`resetVotes` 仅部署者（owner）可调用，通过递增 epoch 在 O(1) 内作废旧票数，不需要遍历候选人列表，因此不会因为候选人数过多而耗尽 gas。
 - **ReverseString**：按字节首尾交换。只保证 ASCII 输入正确；传入多字节 UTF-8 字符时按字节反转，结果不保证是合法字符串。
 - **IntegerToRoman**：贪心查表，支持 1–3999，超出范围 revert。
 - **RomanToInteger**：从右向左扫描，遇到小于当前最大值的字符做减法。空串或非法字符 revert；`IIII` 这类非规范但字符合法的输入按累加返回 4。
