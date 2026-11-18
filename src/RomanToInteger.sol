@@ -18,6 +18,7 @@ contract RomanToInteger {
         for (uint256 i = b.length; i > 0; --i) {
             uint256 value = _value(b[i - 1]);
             if (value < maxSeen) {
+                require(total<=value,"value > total");
                 total -= value;
             } else {
                 total += value;

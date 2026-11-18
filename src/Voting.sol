@@ -16,6 +16,11 @@ contract Voting {
     /// @dev 当前计票轮次；resetVotes 递增该值，使旧票数全部失效
     uint256 private epoch;
 
+    event VoteCandidate(string indexed candidate,uint256 indexed num);
+    event ResetVotes(address indexed account, uint256 amount);
+
+
+    
     constructor() {
         owner = msg.sender;
         // 从 1 开始，避免与未初始化 mapping 的默认值 0 混淆
@@ -35,7 +40,9 @@ contract Voting {
             voteEpoch[candidate] = epoch;
             votes[candidate] = 0;
         }
-        votes[candidate] += 1;
+        uint256 num = votes[candidate] += 1;
+        
+        emit VoteCandidate(candidate,num);
     }
 
     /// @notice 查询候选人当前轮次的得票数；未投票或已重置返回 0
@@ -49,5 +56,6 @@ contract Voting {
     /// @dev 只递增 epoch，不遍历候选人列表，因此无论有多少候选人都保持 O(1)
     function resetVotes() external onlyOwner {
         epoch += 1;
+        emit ResetVotes(msg.sender,epoch);
     }
 }
